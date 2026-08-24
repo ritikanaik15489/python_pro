@@ -1,0 +1,230 @@
+Datatypes:
+
+*** Numeric datatype***
+
+1.Int
+Syntax:- create table student(sid int,age int);
+
+2.Decimal
+Syntax:-decimal(M,D)
+M=total no. of digits.
+D=no. of digits after the decimal point.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| classwork_db       |
+| college_db         |
+| course_db          |
+| ecdac              |
+| emp                |
+| emp1_db            |
+| emp4               |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sales              |
+| student_db         |
+| sys                |
++--------------------+
+16 rows in set (0.05 sec)
+
+mysql> create database pratice_db;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use pratice_db;
+Database changed
+
+mysql> create table product(pid int,pname varchar(20),price decimal(10,2));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc product;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| pid   | int           | YES  |     | NULL    |       |
+| pname | varchar(20)   | YES  |     | NULL    |       |
+| price | decimal(10,2) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into product(pid,pname,price)values
+    -> (1,"laptop",30000),
+    -> (2,"mobile",40.00),
+    -> (3,"mobile",49.00);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc product;
++-------+---------------+------+-----+---------+-------+
+| Field | Type          | Null | Key | Default | Extra |
++-------+---------------+------+-----+---------+-------+
+| pid   | int           | YES  |     | NULL    |       |
+| pname | varchar(20)   | YES  |     | NULL    |       |
+| price | decimal(10,2) | YES  |     | NULL    |       |
++-------+---------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product;
++------+--------+----------+
+| pid  | pname  | price    |
++------+--------+----------+
+|    1 | laptop | 30000.00 |
+|    2 | mobile |    40.00 |
+|    3 | mobile |    49.00 |
++------+--------+----------+
+3 rows in set (0.00 sec)
+
+***String datatype***
+
+1.varchar=variable character
+Syntax:-varchar(size)
+
+***In phone number (0223233877) we mostly use varchar beacuse it is an identifier.
+
+2.char-char store fixed leghth string.
+ Syntax:-char(size)
+
+3.text:-text is an large amount of text.
+CREATE TABLE feedback  ( feedback_id INT, customer_name VARCHAR(100), 
+  feedback TEXT); 
+
+1. Insert One Record - 
+INSERT INTO feedback (feedback_id, customer_name, feedback) 
+VALUES (1, 'Rahul', 'The service was very good.'); 
+ 
+3.  Insert Multiple Records – 
+INSERT INTO feedback (feedback_id, customer_name, feedback) 
+VALUES 
+(1, 'Rahul', 'The service was very good.'), 
+(2, 'Priya', 'The product quality is excellent.'), 
+(3, 'Amit', 'Delivery was fast and convenient.'), 
+(4, 'Sneha', 'The service can be improved.'); 
+
+**Perform the code**
+
+mysql> create table feedback(feedback_id INT, customer_name VARCHAR(100),
+    ->   feedback TEXT);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_pratice_db |
++----------------------+
+| feedback             |
+| product              |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from feedback;
+Empty set (0.01 sec)
+
+mysql> INSERT INTO feedback (feedback_id, customer_name, feedback)
+    -> VALUES (1, 'Rahul', 'The service was very good.');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from feedback;
++-------------+---------------+----------------------------+
+| feedback_id | customer_name | feedback                   |
++-------------+---------------+----------------------------+
+|           1 | Rahul         | The service was very good. |
++-------------+---------------+----------------------------+
+1 row in set (0.00 sec)
+
+****Date datatype.*****
+
+1.Date:
+Syntax:-create table table_name(col datatype,col1 date);
+
+mysql> create table customer(cid int,cname varchar(100),regi_date date);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_pratice_db |
++----------------------+
+| customer             |
+| feedback             |
+| product              |
++----------------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into customer(cid,cname,regi_date)values(101,"mahima","2005-01-12");
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> select * from customer;
++------+--------+------------+
+| cid  | cname  | regi_date  |
++------+--------+------------+
+|  101 | mahima | 2005-01-12 |
++------+--------+------------+
+1 row in set (0.00 sec)
+
+2.Time:Stores time
+
+Ex:- create table table_name(col datatype,col2 time);
+
+mysql> create table login(lid int,lname varchar(11),login_time time);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table login(lid int,lname varchar(11),login_time time);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from login;
++------+--------+------------+
+| lid  | lname  | login_time |
++------+--------+------------+
+|    1 | ritika | 09:23:12   |
++------+--------+------------+
+1 row in set (0.00 sec)
+
+3.Datetime:-used date and time.
+Syntax:-create table tablename(col datatype,col2 datetime)
+
+mysql> create table  cu1(cid int,cname varchar(20),r_datetime datetime);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_pratice_db |
++----------------------+
+| cu1                  |
+| customer             |
+| feedback             |
+| login                |
+| product              |
++----------------------+
+5 rows in set (0.01 sec)
+
+mysql> insert into cu1(cid,cname,r_datetime)values(101,"mahima","2005-01-12 12:23:45");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from cu1;
++------+--------+---------------------+
+| cid  | cname  | r_datetime          |
++------+--------+---------------------+
+|  101 | mahima | 2005-01-12 12:23:45 |
++------+--------+---------------------+
+1 row in set (0.00 sec)
+
+4.Boolean-true or false
+
+mysql> create table customer2(cname varchar(100),is_active boolean);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into customer2(cname,is_active)values("mahima",True);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer2;
++--------+-----------+
+| cname  | is_active |
++--------+-----------+
+| mahima |         1 |
++--------+-----------+
+1 row in set (0.00 sec)
+
