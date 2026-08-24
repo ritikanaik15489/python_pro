@@ -1,0 +1,72 @@
+SQL(Structured Query Language) :- Structured-is an data type . 
+
+Data- In data we can store anything like raw facts , number , name or value
+
+Types of Data
+1.Structured Data - The data is in fixed format that are not able to change.
+It store as an row and column format.
+2.Unstructured Data - The data that can able to make changes the updation are taken place.
+like text , imags , videos , emails 
+3.Semi-Structured Data - Its an combination of structured and unstructured data.
+Ex . Previous google map and updated google map
+
+Query - It is used for perform with data and database 
+
+Database - The database is an container where all the data are stored.
+Any kind of data can be stored in database.
+Requesting the data from database.
+
+Language - Understandle languange for interacting with data and database is used the SQL
+
+SQL-is used to communicate with database . It is used to store , retrive , update and manage too.
+It is an standard language(programming language).
+
+DBMS(Database Management System) :- The data is used to store the in file format . DBMS is software which used to create , store , manage , retreive , update data in database
+Ex-MySql
+Function:-
+Manipulation
+Recovery
+Data Storage
+Security
+
+RDBMS(Relational Database Management System):- The data are store in table format which can be realted each other by there keys
+Relationship : - Connection betn two or more table in database.
+Relationships are usually created by primary and foreign key
+At least need one table has the one colum which are same with other table with same column
+
+
+
+
+Types of Relationships
+1.One-to-One
+ex:- 1 Person -------> 1 Passport
+
+2.One-to-Many
+ex:- 1 Departement -------> many Employee
+
+3.Many-to-Many
+ex:- many Student ----------> many coureses
+
+Table:-Collection of row and colunm
+Horizontal-rows it is called as record/tuple
+Vertical-column it is called as attributes
+
+Attributes-it is used to used to show identities.
+
+Command : - Command prompt 
+Mysql -u root -proot@123
+***For opening the database***
+
+select version(); - which version is installed
+
+show database;
+
+create database databasename;
+
+use databasename; - i want to use any database and by default it will use mysql
+
+select database(); -means it is used to show currently which kind of database i am working with 
+
+drop database databasename;
+
+
