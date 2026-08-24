@@ -1,0 +1,26 @@
+Login process
+mysql -u root -p(password).
+
+Queries.
+1.show databases;
+2.create database databasename;
+3.show tables;
+4.source source location;
+5.insert into table_name (col1,col2,col3) values (val1,val2,val3);
+6.desc table_name;
+7.alter table table_name add col_name datatype;
+8.alter table table_name rename column old_column_name  to new_table;
+9.alter table table_name drop column column_name;
+10.drop table table_name;
+11.truncate table table_name;
+12.explain table_name;
+13.update table_name
+  set column_name=new_value
+  where conditions;
+14.update table_name
+   set column1=value1
+   column2=value2
+   where conditions;
+15.delete from table_name
+   where condition;
+16.delete from table_name;
