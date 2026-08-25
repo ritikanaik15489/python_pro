@@ -1,0 +1,480 @@
+Firstly in cmd we have passes the command as select user(); - used to known where the user()are stored that is which database is stored.
+Previously we have used show databases; and know we can also use show tables; 
+If we want to import the file in cmd then we have to copy path of that file 
+
+Step1:-create database hr_db;
+Step2:-show databases;
+Step3:-use databse;
+Step4:-sourse (paste the proprties of file) remove double ("") it will not accept it and run then the execution will get start
+Step5:-show tables; - display the data 
+
+********Known We Are Starting With The Sql Commands**************
+
+1.DDL(Data Definition Language):-Create,Alter,Drop,Truncate,Rename,Explain,Describe.
+
+#Create:-create database database_name;
+
+#This is first method:-
+ex:-Step1:-create database hr_db;
+Step2:-show databases;
+Step3:-use databse;
+Step4:-sourse (paste the proprties of file) remove double ("") it will not accept it and run then the execution will get start
+Step5:-show tables; - display the data 
+O/P:-
++----------------------+
+| Tables_in_northwind  |
++----------------------+
+| categories           |
+| customercustomerdemo |
+| customerdemographics |
+| customers            |
+| employees            |
+| employeeterritories  |
+| orderdetails         |
+| orders               |
+| products             |
+| region               |
+| shippers             |
+| suppliers            |
+| territories          |
++----------------------+
+13 rows in set (0.01 sec)
+
+#This is secound method:-
+ex create database student(student_id INT,name varchar(100),age INT )
+also we can give float and boolean(bool) 
+ex:-Step1:-create database college_db;
+Step2:-show databases;
+Step3:-use databse;
+Step 4:-create table student(student_name varchar(20),sid int,scourse varchar(20));
+Step 5:-show tables;
+O/P:-
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| student              |
++----------------------+
+1 row in set (0.00 sec)
+
+
+#Now we have used (desc)
+desc student;  (describe the table)
+output will give like this:-
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sid      | int         | YES  |     | NULL    |       |
+| sname    | varchar(20) | YES  |     | NULL    |       |
+| s_course | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+ 
+
+we can also use describe student;
+get the same output.
+O/P:-
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sid      | int         | YES  |     | NULL    |       |
+| sname    | varchar(20) | YES  |     | NULL    |       |
+| s_course | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+ 
+
+
+Step1:-show database;
+Step 2:-use books;
+output will get has this
++-----------------+
+| Tables_in_books |
++-----------------+
+| books           |
++-----------------+
+Step 3:-select * from books; - display the whole details;  from books means inside the table attributes ha to be placed. Like if in book inside attribute is author theen we can used for displaying output in next step.
+output will be this // this is data and structure.
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1021 | OS           | Design of the UNIX Operating System                  | Maurice J. Bach                     |   255 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+
+
+Step 4:-select book_id from books; - get the only names display // we can also pass mutiple table name like select book_id,subject_name,book_name from books;
+output will be:-
++---------+
+| book_id |
++---------+
+|    1001 |
+|    1002 |
+|    1003 |
+|    1004 |
+|    1005 |
+|    1006 |
+|    1007 |
+|    1008 |
+|    1009 |
+|    1010 |
+|    1011 |
+|    1012 |
+|    1013 |
+|    1014 |
+|    1015 |
+|    1016 |
+|    1017 |
+|    1018 |
+|    1019 |
+|    1020 |
+|    1021 |
+|    1022 |
+|    1023 |
+|    1024 |
+|    1025 |
++---------+
+25 rows in set (0.00 sec)
+
+#If we want to see the structure then use desc
+ Syntax: desc books;     gets an books in struture
+O/P:-
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   | PRI | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+
+#The prvious book table as to be copy in another table then has to be used. craete table new table name as select * from old table name;
+Syntax: - create table book2 as select * from book;
+Query OK, 25 rows affected (0.12 sec)
+Records: 25  Duplicates: 0  Warnings: 0
+
+Step2:-show tables;
+O/P:-
++-----------------+
+| Tables_in_books |
++-----------------+
+| book2           |
+| books           |
++-----------------+
+2 rows in set (0.00 sec)
+
+Step 3:-select * from  book2;
+O/P:-Data an stucture
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1021 | OS           | Design of the UNIX Operating System                  | Maurice J. Bach                     |   255 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+25 rows in set (0.00 sec)
+
+Step4: create table book3 like book2;
+Query OK, 0 rows affected (0.04 sec)
+
+ This syntax is used to get the ouput of structure not data.
+O/P:-
+use this:-desc book3;   // for structure 
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+ show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book2           |                // In this book2 and books has data and structure because we have used (as) and data3 which as created by (like) has only structure.
+| book3           |
+| books           |
++-----------------+
+3 rows in set (0.00 sec)
+
+
+       #Alter - The alter command is used to modify the structure of the exisiting table.
+           
+1. Adding single column
+Syntax:- alter table table_name add column_name datataype;
+
+Step 1:-select * from book2;
+Step 2:-desc book2;
+Step 3:-alter table book2 add place varchar(100);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+Step 4:-desc book2;
+O/P:-
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+2.Adding multiple column
+Syntax:- alter table table_name add column1 datatype,add column2 datatype;
+
+Used this:- alter table book2 add pages int,add year int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
+| pages        | int          | YES  |     | NULL    |       |
+| year         | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+2.Modify:-Changing datatype or exisying columns.
+
+Used this:- alter table book2 modify pages float;
+Query OK, 25 rows affected (0.12 sec)
+Records: 25  Duplicates: 0  Warnings: 0
+
+mysql> desc book2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
+| pages        | float        | YES  |     | NULL    |       |
+| year         | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+3.Rename:-Renaming the column names.
+
+Used this :- alter table book2 rename column pages to total_pages;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
+| total_pages  | float        | YES  |     | NULL    |       |
+| year         | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+4.Drop:-removing the column.
+
+Use this:-  alter table book2 drop column total_pages;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc book2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
+| year         | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+
+3.Drop:-droping the table.
+1.Drop table:-drop the table peremntely data and structure are getting permentely delete.
+
+syntax:-drop table table_name;
+Used this :- drop table book3;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book2           |
+| books           |
++-----------------+
+2 rows in set (0.00 sec)
+
+
+2.Drop database:-droping the database
+Syntax:-drop database database_name;
+
+
+4.Truncate:-Truncate remove all rows from table but keep structure as it is.
+
+Used this:- truncate table book2;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from book2;    // the data has been removed but structure remain as it is.
+Empty set (0.01 sec)
+
+mysql> desc book2;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   |     | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
+| place        | varchar(100) | YES  |     | NULL    |       |
+| year         | int          | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+5.Rename:-Rename the table name.
+
+Previous one was this table:
+
+  show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book2           |
+| books           |
++-----------------+
+2 rows in set (0.00 sec)
+
+
+Used this : - rename table book2 to books4;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| books           |
+| books4          |
++-----------------+
+2 rows in set (0.00 sec)
+
+6.Explain:-
+
+select * from books;
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1021 | OS           | Design of the UNIX Operating System                  | Maurice J. Bach                     |   255 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+25 rows in set (0.01 sec)
+
+mysql> explain select * from books;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | books | NULL       | ALL  | NULL          | NULL | NULL    | NULL |   25 |   100.00 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.01 sec)
+
+mysql> explain books;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| book_id      | int          | NO   | PRI | NULL    |       |
+| subject_name | varchar(256) | NO   |     | NULL    |       |
+| book_name    | varchar(256) | YES  |     | NULL    |       |
+| author_name  | varchar(256) | YES  |     | NULL    |       |
+| price        | float        | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+
