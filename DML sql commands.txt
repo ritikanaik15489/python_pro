@@ -1,0 +1,256 @@
+DML:-Data manipulation languangae
+
+#### We perform insert,delete,update command in dml. ###
+
+1.Insert:-inseting the ading new records/rows in tables.
+
+A.Inserting valuse in column.
+Syntax:-insert into table_name(value1,value2,value3);
+
+Step1:- use student_db;
+Database changed
+Step2:- mysql> show tables;
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| student              |
+| student2             |
++----------------------+
+2 rows in set (0.00 sec)
+
+Step3:- desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sid      | int         | YES  |     | NULL    |       |
+| sname    | varchar(20) | YES  |     | NULL    |       |
+| s_course | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+Step4:-
+mysql> drop table student;
+Query OK, 0 rows affected (0.02 sec)
+
+Step5:- create table student(sid int,sname varchar(20),age int,course varchar(20));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_college_db |
++----------------------+
+| student              |
+| student2             |
++----------------------+
+2 rows in set (0.01 sec)
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int         | YES  |     | NULL    |       |
+| sname  | varchar(20) | YES  |     | NULL    |       |
+| age    | int         | YES  |     | NULL    |       |
+| course | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+Step6:- 
+insert into student values(101,"sunil",20,"java");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from student;
++------+-------+------+--------+
+| sid  | sname | age  | course |
++------+-------+------+--------+
+|  101 | sunil |   20 | java   |
++------+-------+------+--------+
+1 row in set (0.00 sec)
+
+B.Insert with column names.
+
+Syntax:- insert into table_name(column 1 , column 2 , column 3)values(value1,value2,value3);
+
+Used this:-  insert into student(sid,sname,age,course)values(102,"ram",22,"python");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from student;
++------+-------+------+--------+
+| sid  | sname | age  | course |
++------+-------+------+--------+
+|  101 | sunil |   20 | java   |
+|  102 | ram   |   22 | python |
++------+-------+------+--------+
+2 rows in set (0.00 sec)
+
+C.Insert multiple records.
+
+Syntax:- insert into table_name(column1,column2,column3)
+         values(value1,value2,value3)
+         (value1,value2,value3)
+         (value1,value2,value3);
+
+USed this:- insert into student(sid,sname,age,course)
+    ->  values(102,"sham",23,"data analyst"),
+    -> (104,"ritika",21,"data science"),
+    ->  (105,"sam",10,"sql");
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+select * from student;
++------+--------+------+--------------+
+| sid  | sname  | age  | course       |
++------+--------+------+--------------+
+|  101 | sunil  |   20 | java         |
+|  102 | ram    |   22 | python       |
+|  102 | sham   |   23 | data analyst |
+|  104 | ritika |   21 | data science |
+|  105 | sam    |   10 | sql          |
++------+--------+------+--------------+
+5 rows in set (0.00 sec)
+
+
+D.Inset null value.
+
+Syntax:-insert into students(sid,sname,age,course)values(value1,value2,value3);
+
+Used this :- insert into student(sid,sname,age,course)values(106,"Mahima",23,null);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from student;
++------+--------+------+--------------+
+| sid  | sname  | age  | course       |
++------+--------+------+--------------+
+|  101 | sunil  |   20 | java         |
+|  102 | ram    |   22 | python       |
+|  102 | sham   |   23 | data analyst |         //by default it will be null value also.neither we place value null or not.
+|  104 | ritika |   21 | data science |
+|  105 | sam    |   10 | sql          |
+|  106 | Mahima |   23 | NULL         |
++------+--------+------+--------------+
+6 rows in set (0.00 sec)
+
+
+2.Update Command:-
+
+A.Update multiple column.
+
+Syntax:-update table_name 
+        set column_name=new_value
+        where conditions;
+
+Use this:-  update student
+    -> set course="full_stack_java"
+    ->  where sid=106;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from student;
++------+--------+------+-----------------+
+| sid  | sname  | age  | course          |
++------+--------+------+-----------------+
+|  101 | sunil  |   20 | java            |
+|  102 | ram    |   22 | python          |
+|  102 | sham   |   23 | data analyst    |
+|  104 | ritika |   21 | data science    |
+|  105 | sam    |   10 | sql             |
+|  106 | Mahima |   23 | full_stack_java |
++------+--------+------+-----------------+
+6 rows in set (0.00 sec) 
+         
+B.Update multiple column(another method).
+
+Syntax:- Update table_name;
+         set column1=value1
+         column2=value2
+         where conditions;
+
+C.Update without where:-
+You can see the syntax in notebook.
+
+5.Delete Command:-The delete command is used to remove existing records from a table.
+
+Syntax:-Delete from table_name;
+
+A.Delete Single Recors:-It is used to delete the single records.
+
+Use this:- delete from book4 where subject_name="C";
+Query OK, 5 rows affected (0.01 sec)
+
+select * from book4;
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                | price |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup          |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata              |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers               |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri           |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt            |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra               |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt            |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling              |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch               |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman               |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim               |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson           |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David             |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner             |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson |   735 |
+|    1021 | OS           | Design of the UNIX Operating System                  | Maurice J. Bach            |   255 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings          |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh              |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum        |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                     |   575 |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+20 rows in set (0.00 sec)
+
+B.Delete Multiple Records:-You can able to delete multiple records.
+
+Syntax:-delete from table_name
+        where condition;
+
+Used this:- delete from book5
+    -> where price<300;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
+| books           |
+| books4          |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+24 rows in set (0.00 sec)
+
