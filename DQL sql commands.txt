@@ -1,0 +1,46 @@
+DQL-Data Query Language.
+
+1.Select:-The select command is used to retrive one or more tables.
+Syntax:-select column_name from table_name;
+
+show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
+| books           |
+| books4          |
++-----------------+
+3 rows in set (0.00 sec)
+
+Used this:- select book_name , author_name from book5;
+O/P:-
++------------------------------------------------------+-------------------------------------+
+| book_name                                            | author_name                         |
++------------------------------------------------------+-------------------------------------+
+| Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |
+| The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |
+| EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |
+| The C Companion                                      | Allen I. Holub                      |
+| Head First C                                         | Griffiths David                     |
+| The C++ Programming Language                         | Bjarne Stroustrup                   |
+| C++ Primer Plus                                      | Stephen Prata                       |
+| More Effective C++                                   | Scott Meyers                        |
+| C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |
+| C++: The Complete Reference                          | Herbert Schildt                     |
+| Head First Java                                      | Kathy Sierra                        |
+| Java: The Complete Reference                         | Herbert Schildt                     |
+| The Java Programming Language                        | James Gosling                       |
+| Effective Java                                       | Joshua Bloch                        |
+| Big Java Early Objects                               | Cay Horstman                        |
+| HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |
+| Head First HTML and CSS                              | Elisabeth Robson                    |
+| JavaScript: The Definitive Guide                     | Flanagan David                      |
+| Inside XML                                           | Steven Holzner                      |
+| PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |
+| Operating Systems: Internals and Design Principles   | William Stallings                   |
+| Operating System: Concepts and Techniques            | M Naghibzadeh                       |
+| Modern Operating Systems                             | Andrew S. Tanenbaum                 |
+| Operating System Concept                             | Galvin                              |
++------------------------------------------------------+-------------------------------------+
+24 rows in set (0.00 sec)
