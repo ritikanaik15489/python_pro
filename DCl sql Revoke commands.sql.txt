@@ -1,0 +1,124 @@
+Revoke:-It is used to remove permisssions from thr mysql user.
+
+Syntax:-Revoke privileges on table_name from 'username';
+
+C:\Users\Admin>mysql -u root -proot@123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 24
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| classwork_db       |
+| college_db         |
+| course_db          |
+| ecdac              |
+| emp                |
+| emp1_db            |
+| emp4               |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sales              |
+| student_db         |
+| sys                |
++--------------------+
+16 rows in set (0.02 sec)
+
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql> use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
+| books           |
+| books4          |
++-----------------+
+3 rows in set (0.02 sec)
+
+mysql> revoke insert,delete on book5 from kiranacademy;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> quit;
+Bye
+
+C:\Users\Admin>mysql -u kiranacademy -pkiran@123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.02 sec)
+
+mysql> use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
++-----------------+
+1 row in set (0.01 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                | price |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup          |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata              |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers               |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri           |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt            |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra               |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt            |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling              |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch               |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman               |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim               |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson           |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David             |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner             |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings          |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh              |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum        |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                     |   575 |
+|    1026 | c            | kiranacademy                                         | kiran sir                  |    20 |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+20 rows in set (0.00 sec)
+
+mysql> insert into book5 values(1026,"c","kiranacademy","kiran sir",20);
+ERROR 1142 (42000): INSERT command denied to user 'kiranacademy'@'localhost' for table 'book5'   //Now in this we cannot able to perform any kind of operation like insert,delete or upadation because we have revoke the from the root.

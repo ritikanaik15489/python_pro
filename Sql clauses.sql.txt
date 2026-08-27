@@ -1,0 +1,563 @@
+Clauses:-These clauses are used to select, filter, group, and combine data from one or more tables
+
+1. WHERE Clause – 
+The WHERE clause is used to filter individual rows from a table. 
+
+Syntax – 
+SELECT column1, column2 
+FROM table_name 
+WHERE condition; 
+ 
+Ex:-
+
+mysql> use emp;
+Database changed
+mysql> show tables;
+Empty set (0.03 sec)
+
+mysql> create table employee(emp_id int,name varchar(20),dep varchar(20),salary decimal(10,2));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show tables;
++---------------+
+| Tables_in_emp |
++---------------+
+| employee      |
++---------------+
+1 row in set (0.01 sec)
+
+mysql> insert into employee(emp_id,name,dep,salary)values
+    -> (101, 'Rahul', 'IT', 50000),
+    -> (102, 'Priya', 'HR', 40000),
+    -> (103, 'Amit', 'IT', 60000),
+    -> (104, 'Sneha', 'Sales', 45000);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++--------+-------+-------+----------+
+| emp_id | name  | dep   | salary   |
++--------+-------+-------+----------+
+|    101 | Rahul | IT    | 50000.00 |
+|    102 | Priya | HR    | 40000.00 |
+|    103 | Amit  | IT    | 60000.00 |
+|    104 | Sneha | Sales | 45000.00 |
++--------+-------+-------+----------+
+4 rows in set (0.00 sec)
+
+2nd Syntax:- select * from table_name
+             where condition
+
+mysql> select * from employee
+    -> where dep="IT";
++--------+-------+------+----------+
+| emp_id | name  | dep  | salary   |
++--------+-------+------+----------+
+|    101 | Rahul | IT   | 50000.00 |
+|    103 | Amit  | IT   | 60000.00 |
++--------+-------+------+----------+
+2 rows in set (0.00 sec)
+
+Another example is:
+
+Ex:-
+
+mysql> select name,salary
+    -> from employee
+    -> where salary>50000;
++------+----------+
+| name | salary   |
++------+----------+
+| Amit | 60000.00 |
++------+----------+
+1 row in set (0.00 sec)
+
+Common operators with WHERE – 
+Operator  Meaning  Example 
+=  Equal to  salary = 50000 
+>  Greater than  salary > 50000 
+<  Less than  salary < 50000 
+>=  Greater than or equal  salary >= 50000 
+<=  Less than or equal  salary <= 50000 
+<>  Not equal  department <> 'HR' 
+AND  Both conditions true  salary > 40000 AND department = 'IT' 
+OR  Either condition true  department = 'IT' OR department = 'HR' 
+
+
+2. BETWEEN Operator - 
+The BETWEEN operator is used to select values within a specified range. 
+It includes both the starting and ending values. 
+Syntax –  
+  SELECT column_name  FROM table_name 
+WHERE column_name BETWEEN value1 AND value2;
+
+Ex:-
+
+mysql> select * from employee
+    -> where salary between 40000 and 50000;
++--------+-------+-------+----------+
+| emp_id | name  | dep   | salary   |
++--------+-------+-------+----------+
+|    101 | Rahul | IT    | 50000.00 |
+|    102 | Priya | HR    | 40000.00 |
+|    104 | Sneha | Sales | 45000.00 |
++--------+-------+-------+----------+
+3 rows in set (0.00 sec)
+
+
+3. IN Operator -  
+The IN operator is used to check whether a value matches any value in a list. 
+It is useful when we have multiple possible values. 
+Syntax –  
+SELECT column_name FROM table_name 
+WHERE column_name IN (value1, value2, value3); 
+
+Ex:-
+
+mysql> select * from employee
+    -> where dep='it'
+    -> or dep='hr';
++--------+-------+------+----------+
+| emp_id | name  | dep  | salary   |
++--------+-------+------+----------+
+|    101 | Rahul | IT   | 50000.00 |
+|    102 | Priya | HR   | 40000.00 |
+|    103 | Amit  | IT   | 60000.00 |
++--------+-------+------+----------+
+3 rows in set (0.00 sec)
+
+If it not found then it will give an empty set.
+
+mysql> select * from employee
+    -> where salary between 90000 and 30000;
+Empty set (0.00 sec)
+
+4.Like Operator:-The LIKE operator is used to search for a specific pattern in text/string values. 
+
+Syntax - 
+  SELECT column_name FROM table_name 
+WHERE column_name LIKE 'pattern'; 
+
+1.SELECT *FROM employees 
+  WHERE name LIKE 'R%';       //Name must start with R, followed by any number of characters. //Any letters can pass 
+
+mysql> select * from customer
+    -> where cname like 'R%';
++------+-------+------+-------+--------+-----------------+
+| cid  | cname | age  | city  | gender | purchase_amount |
++------+-------+------+-------+--------+-----------------+
+|  101 | Rahul |   25 | Pune  | Male   |           15000 |
+|  107 | Rohan |   32 | Delhi | Male   |           30000 |
++------+-------+------+-------+--------+-----------------+
+2 rows in set (0.00 sec)
+
+2.'%a';
+
+mysql> select * from customer
+    -> where cname like '%a';          //Give the names which ends with th provided letter.//Any letters can pass.
++------+-------+------+--------+--------+-----------------+
+| cid  | cname | age  | city   | gender | purchase_amount |
++------+-------+------+--------+--------+-----------------+
+|  102 | Priya |   30 | Mumbai | Female |           25000 |
+|  104 | Sneha |   28 | Delhi  | Female |           18000 |
+|  106 | Neha  |   22 | Pune   | Female |           12000 |
+|  108 | Pooja |   27 | Mumbai | Female |           22000 |
+|  110 | Anita |   24 | Delhi  | Female |           14000 |
++------+-------+------+--------+--------+-----------------+
+5 rows in set (0.00 sec)
+
+
+3.'%i%'; 
+
+mysql> select * from customer
+    -> where cname like '%i%';    //In this any names having i letter any where at start,middle or at end it will give it.//Any letter can be pass.
++------+-------+------+--------+--------+-----------------+
+| cid  | cname | age  | city   | gender | purchase_amount |
++------+-------+------+--------+--------+-----------------+
+|  102 | Priya |   30 | Mumbai | Female |           25000 |
+|  103 | Amit  |   35 | Pune   | Male   |           40000 |
+|  105 | kiran |   40 | Mumbai | Male   |           55000 |
+|  110 | Anita |   24 | Delhi  | Female |           14000 |
++------+-------+------+--------+--------+-----------------+
+4 rows in set (0.00 sec)
+
+4.'_a%'
+
+mysql> select * from customer
+    -> where cname like '_a%';    //It gives the secound letter o/p with the letter is passed.
++------+-------+------+------+--------+-----------------+
+| cid  | cname | age  | city | gender | purchase_amount |
++------+-------+------+------+--------+-----------------+
+|  101 | Rahul |   25 | Pune | Male   |           15000 |
++------+-------+------+------+--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer
+    -> where cname like '_r%';
++------+-------+------+--------+--------+-----------------+
+| cid  | cname | age  | city   | gender | purchase_amount |
++------+-------+------+--------+--------+-----------------+
+|  102 | Priya |   30 | Mumbai | Female |           25000 |
++------+-------+------+--------+--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer
+    -> where cname like 'a%h';    //we can also write the start and end letters.
++------+-------+------+------+--------+-----------------+
+| cid  | cname | age  | city | gender | purchase_amount |
++------+-------+------+------+--------+-----------------+
+|  109 | Akash |   45 | Pune | Male   |           65000 |
++------+-------+------+------+--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where cname like "s____"; //It will five the word according to the ____ you are provide like shena s _ _ _ _ _ then it will find and will o/p.
++------+-------+------+-------+--------+-----------------+
+| cid  | cname | age  | city  | gender | purchase_amount |
++------+-------+------+-------+--------+-----------------+
+|  104 | Sneha |   28 | Delhi | Female |           18000 |
++------+-------+------+-------+--------+-----------------+
+1 row in set (0.01 sec)
+
+
+mysql> select * from customer where cname like "r____a";  // Giving the space like fill in the blanks.
++------+--------+------+------+--------+-----------------+
+| cid  | cname  | age  | city | gender | purchase_amount |
++------+--------+------+------+--------+-----------------+
+|  111 | ritika |   23 | Pune | Female |          450000 |
++------+--------+------+------+--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where cname like "a_ita"; //It will find and give the o/p we can also give as missing alphabets.
++------+-------+------+-------+--------+-----------------+
+| cid  | cname | age  | city  | gender | purchase_amount |
++------+-------+------+-------+--------+-----------------+
+|  110 | Anita |   24 | Delhi | Female |           14000 |
++------+-------+------+-------+--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where cname like '____';   // passing the word length then only it will give o/p.
++------+-------+------+----------+--------+-----------------+
+| cid  | cname | age  | city     | gender | purchase_amount |
++------+-------+------+----------+--------+-----------------+
+|  103 | Amit  |   35 | Pune     | Male   |           40000 |
+|  106 | Neha  |   22 | Pune     | Female |           12000 |
+|  113 | amir  |   44 | hyderbad | male   |            NULL |
++------+-------+------+----------+--------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where cname like '____%';   // it will give the whole table.
++------+--------+------+----------+--------+-----------------+
+| cid  | cname  | age  | city     | gender | purchase_amount |
++------+--------+------+----------+--------+-----------------+
+|  101 | Rahul  |   25 | Pune     | Male   |           15000 |
+|  102 | Priya  |   30 | Mumbai   | Female |           25000 |
+|  103 | Amit   |   35 | Pune     | Male   |           40000 |
+|  104 | Sneha  |   28 | Delhi    | Female |           18000 |
+|  105 | kiran  |   40 | Mumbai   | Male   |           55000 |
+|  106 | Neha   |   22 | Pune     | Female |           12000 |
+|  107 | Rohan  |   32 | Delhi    | Male   |           30000 |
+|  108 | Pooja  |   27 | Mumbai   | Female |           22000 |
+|  109 | Akash  |   45 | Pune     | Male   |           65000 |
+|  110 | Anita  |   24 | Delhi    | Female |           14000 |
+|  111 | ritika |   23 | Pune     | Female |          450000 |
+|  112 | snehal |   23 | Mumbai   | female |          550000 |
+|  113 | amir   |   44 | hyderbad | male   |            NULL |
++------+--------+------+----------+--------+-----------------+
+13 rows in set (0.00 sec)
+
+5.Null:
+NULL means no value / missing value / unknown value. 
+
+**We do not have to use =NULL it is wrong method we just have to use is null to find the null name or age or purhase_Amount.
+
+mysql> select * from customer where purchase_amount=NULL;
+Empty set (0.00 sec)
+
+6.IS NULL 
+To find records containing NULL, use IS NULL. 
+Syntax – 
+  SELECT * FROM table_name 
+WHERE column_name IS NULL; 
+
+mysql> select * from customer
+    -> where purchase_amount is null;
++------+-------+------+----------+--------+-----------------+
+| cid  | cname | age  | city     | gender | purchase_amount |
++------+-------+------+----------+--------+-----------------+
+|  113 | amir  |   44 | hyderbad | male   |            NULL |
++------+-------+------+----------+--------+-----------------+
+1 row in set (0.00 sec)
+
+6. IS NOT NULL 
+To find records that do have a value, use IS NOT NULL. 
+
+Syntax – 
+  SELECT * FROM table_name 
+WHERE column_name IS NOT NULL;
+
+mysql> select * from customer
+    -> where purchase_amount is not null;
++------+--------+------+--------+--------+-----------------+
+| cid  | cname  | age  | city   | gender | purchase_amount |
++------+--------+------+--------+--------+-----------------+
+|  101 | Rahul  |   25 | Pune   | Male   |           15000 |
+|  102 | Priya  |   30 | Mumbai | Female |           25000 |
+|  103 | Amit   |   35 | Pune   | Male   |           40000 |
+|  104 | Sneha  |   28 | Delhi  | Female |           18000 |
+|  105 | kiran  |   40 | Mumbai | Male   |           55000 |
+|  106 | Neha   |   22 | Pune   | Female |           12000 |
+|  107 | Rohan  |   32 | Delhi  | Male   |           30000 |
+|  108 | Pooja  |   27 | Mumbai | Female |           22000 |
+|  109 | Akash  |   45 | Pune   | Male   |           65000 |
+|  110 | Anita  |   24 | Delhi  | Female |           14000 |
+|  111 | ritika |   23 | Pune   | Female |          450000 |
+|  112 | snehal |   23 | Mumbai | female |          550000 |
++------+--------+------+--------+--------+-----------------+
+12 rows in set (0.00 sec)
+
+7.Group by - The group clause is used to combine rows having the same value into groups.
+
+Syntax:-select column_name from table_name
+        group by column_name;
+
+mysql> select cname from customer group by cname;    // a single column.
++--------+
+| cname  |
++--------+
+| Rahul  |
+| Priya  |
+| Amit   |
+| Sneha  |
+| kiran  |
+| Neha   |
+| Rohan  |
+| Pooja  |
+| Akash  |
+| Anita  |
+| ritika |
+| snehal |
+| amir   |
++--------+
+13 rows in set (0.01 sec)
+
+
+mysql> select cname from customer where cname="ritika" group by cname;      //giving an particular name.
++--------+
+| cname  |
++--------+
+| ritika |
++--------+
+1 row in set (0.00 sec)
+
+
+a.Grouping multiple columns:
+Syntax:-select column1,column2 from table_name group by column1,column2;
+
+mysql> select cname,city,gender from customer group by cname,city,gender;   //grouping tables.
++--------+----------+--------+
+| cname  | city     | gender |
++--------+----------+--------+
+| Rahul  | Pune     | Male   |
+| Priya  | Mumbai   | Female |
+| Amit   | Pune     | Male   |
+| Sneha  | Delhi    | Female |
+| kiran  | Mumbai   | Male   |
+| Neha   | Pune     | Female |
+| Rohan  | Delhi    | Male   |
+| Pooja  | Mumbai   | Female |
+| Akash  | Pune     | Male   |
+| Anita  | Delhi    | Female |
+| ritika | Pune     | Female |
+| snehal | Mumbai   | female |
+| amir   | hyderbad | male   |
++--------+----------+--------+
+13 rows in set (0.00 sec)
+
+
+b.by usinh where clauses:-
+Syntax:-select column_name from table_name where condition group by column_name;
+
+mysql> select cname,city,gender from customer where gender="female" group by cname,city,gender;   //by applying condition.
++--------+--------+--------+
+| cname  | city   | gender |
++--------+--------+--------+
+| Priya  | Mumbai | Female |
+| Sneha  | Delhi  | Female |
+| Neha   | Pune   | Female |
+| Pooja  | Mumbai | Female |
+| Anita  | Delhi  | Female |
+| ritika | Pune   | Female |
+| snehal | Mumbai | female |
++--------+--------+--------+
+7 rows in set (0.00 sec)
+
+
+8.Order by:-The order by clauses is used to sort the records of tables.
+
+For ascending we use asc // foe sorting the records in ascending // it is optional because by eafult it will print in acending order only,
+
+Syntax:-select col1,col2....
+        from table_name
+        order by column_name asc;
+
+mysql> select cname,purchase_amount from customer order by purchase_amount;
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| amir   |            NULL |
+| Neha   |           12000 |
+| Anita  |           14000 |
+| Rahul  |           15000 |
+| Sneha  |           18000 |
+| Pooja  |           22000 |
+| Priya  |           25000 |
+| Rohan  |           30000 |
+| Amit   |           40000 |
+| kiran  |           55000 |
+| Akash  |           65000 |
+| ritika |          450000 |
+| snehal |          550000 |
++--------+-----------------+
+13 rows in set (0.00 sec)
+
+
+
+mysql> select cname,purchase_amount from customer order by purchase_amount asc;//in this it will give the o/p which the firsr table_name is provided.
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| amir   |            NULL |
+| Neha   |           12000 |
+| Anita  |           14000 |
+| Rahul  |           15000 |
+| Sneha  |           18000 |
+| Pooja  |           22000 |
+| Priya  |           25000 |
+| Rohan  |           30000 |
+| Amit   |           40000 |
+| kiran  |           55000 |
+| Akash  |           65000 |
+| ritika |          450000 |
+| snehal |          550000 |
++--------+-----------------+
+13 rows in set (0.00 sec)
+
+mysql> select cname,purchase_amount from customer order by purchase_amount desc;
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| snehal |          550000 |
+| ritika |          450000 |
+| Akash  |           65000 |
+| kiran  |           55000 |
+| Amit   |           40000 |
+| Rohan  |           30000 |
+| Priya  |           25000 |
+| Pooja  |           22000 |
+| Sneha  |           18000 |
+| Rahul  |           15000 |
+| Anita  |           14000 |
+| Neha   |           12000 |
+| amir   |            NULL |
++--------+-----------------+
+13 rows in set (0.00 sec)
+
+mysql> select cname,purchase_amount from customer order by cname desc;
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| snehal |          550000 |
+| Sneha  |           18000 |
+| Rohan  |           30000 |
+| ritika |          450000 |
+| Rahul  |           15000 |
+| Priya  |           25000 |
+| Pooja  |           22000 |
+| Neha   |           12000 |
+| kiran  |           55000 |
+| Anita  |           14000 |
+| Amit   |           40000 |
+| amir   |            NULL |
+| Akash  |           65000 |
++--------+-----------------+
+13 rows in set (0.00 sec)
+
+**Using an limit**
+
+mysql> select cname,purchase_amount from customer order by purchase_amount desc limit 1; //for geeting an limit 1 record with particular amount which is highest or lowest.
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| snehal |          550000 |
++--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select cname,purchase_amount from customer order by purchase_amount desc limit 1,1; // secound highest number
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| ritika |          450000 |
++--------+-----------------+
+1 row in set (0.00 sec)
+
+mysql> select cname,purchase_amount from customer order by purchase_amount desc limit 1,2; //secound and third highest.
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| ritika |          450000 |
+| Akash  |           65000 |
++--------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> select cname,purchase_amount from customer order by purchase_amount desc limit 4,1;
++-------+-----------------+
+| cname | purchase_amount |
++-------+-----------------+
+| Amit  |           40000 |
++-------+-----------------+
+1 row in set (0.00 sec)
+
+
+mysql> select cname,purchase_amount from customer order by cname desc,purchase_amount desc; 
++--------+-----------------+
+| cname  | purchase_amount |
++--------+-----------------+
+| snehal |          550000 |
+| Sneha  |           18000 |
+| Rohan  |           30000 |
+| ritika |          450000 |
+| Rahul  |           15000 |
+| Priya  |           25000 |
+| Pooja  |           22000 |
+| Neha   |           12000 |
+| kiran  |           55000 |
+| Anita  |           14000 |
+| Amit   |           40000 |
+| amir   |            NULL |
+| Akash  |           65000 |
++--------+-----------------+
+13 rows in set (0.00 sec)
+
+mysql> select purchase_amount,cname from customer order by purchase_amount desc,cname asc;
++-----------------+--------+
+| purchase_amount | cname  |
++-----------------+--------+
+|          550000 | snehal |
+|          450000 | ritika |
+|           65000 | Akash  |
+|           55000 | kiran  |
+|           40000 | Amit   |
+|           30000 | Rohan  |
+|           25000 | Priya  |
+|           22000 | Pooja  |
+|           18000 | Sneha  |
+|           15000 | Rahul  |
+|           14000 | Anita  |
+|           12000 | Neha   |
+|            NULL | amir   |
++-----------------+--------+
+13 rows in set (0.00 sec)
+
+
+
+

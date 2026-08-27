@@ -1,0 +1,430 @@
+DCL:Data control language is used to control the acess and permissions of user in a database.
+
+Step:1
+
+select user();
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+Step2:                                  //This both is used for knowing what in mysql how many users are there and where the user is.
+
+select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+4 rows in set (0.02 sec)
+
+1.Create User:-It is used to create the new mysql user account.
+Syntax:-create user 'username' @ 'host' identified by 'password'
+
+Used this:- create user "kiranacademy" identified by '@123';
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| kiranacademy     |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+5 rows in set (0.00 sec)
+
+Step3:-Know we exit from current sql and move towards the newly created once that is kiranacademy with there password.
+
+exit;
+Bye
+
+C:\Users\Admin>mysql -u kiranacademy -p@123    //Then it gets open.
+
+//Now it will show the kiranacademy user database that is 2 database are excited.
+
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
++--------------------+
+2 rows in set (0.04 sec)
+
+select user();
++------------------------+
+| user()                 |
++------------------------+
+| kiranacademy@localhost |     //Knowing now in which user it is.
++------------------------+
+1 row in set (0.00 sec)
+
+//after that i will get exit from kiranacademy user.
+
+
+exit;
+Bye
+
+C:\Users\Admin>mysql -u root -proot@123   //and login with previous one.
+
+2.Create the new password.
+
+Step 4:-Now we have to craete the new or modify the password of kiranacademy user.Inside the kiranacademy user only we have to create the the new password.If you are in another user and craeting the other new password then it will not work.
+
+mysql -u kiranacademy -p@123 //login in kiranacademy.
+
+Used this :- set password='kiran@123';
+Query OK, 0 rows affected (0.04 sec)     //change the passsword now exit and repeat login with kiranacademy user with newly password created.
+
+
+mysql> exit;
+Bye
+
+C:\Users\Admin>rmysql -u kiranacademy -pkiran@123   //login with new password.
+
+A.Grant Access:-It provide access privilages to user on datanases and tables.
+
+Syntax:-grant privileges_name on table_name to username;
+
+///In this we are giving the accsess like select , update, delete,insert commands to user to perform task.
+
+
+  Step 1:-mysql> exit;    //from kiranacademy exit
+Bye
+
+C:\Users\Admin>mysql -u root -proot@123
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| classwork_db       |
+| college_db         |
+| course_db          |
+| ecdac              |
+| emp                |
+| emp1_db            |
+| emp4               |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sales              |
+| student_db         |
+| sys                |
++--------------------+
+16 rows in set (0.01 sec)
+
+use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
+| books           |
+| books4          |
++-----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+24 rows in set (0.00 sec)
+
+mysql> grant select on book5 to kiranacademy;   // permission passes has select.
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> exit;
+Bye
+
+C:\Users\Admin>mysql -u kiranacademy -pkiran@123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.01 sec)
+
+mysql> use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+                   //it we only perform select permission which has given not other then that.it will give error.
+| book5           |
++-----------------+
+1 row in set (0.02 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+24 rows in set (0.00 sec)
+
+mysql> quit;
+Bye
+
+C:\Users\Admin>mysql -u root -proot@123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 22
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| classwork_db       |
+| college_db         |
+| course_db          |
+| ecdac              |
+| emp                |
+| emp1_db            |
+| emp4               |
+| hr                 |
+| information_schema |
+| mysql              |
+| northwind          |
+| performance_schema |
+| sales              |
+| student_db         |
+| sys                |
++--------------------+
+16 rows in set (0.02 sec)
+
+mysql> use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
+| books           |
+| books4          |
++-----------------+
+3 rows in set (0.02 sec)
+
+mysql> grant select,insert,delete on book5 to kiranacademy;   //known we have passed multiple priviliges to the user.
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> quit;
+Bye
+
+C:\Users\Admin>mysql -u kiranacademy -pkiran@123
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 23
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| books              |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> use books;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                         | price |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+|    1001 | C            | Programming with C(Schaums Outlines Series)          | Byron S Gottfried                   |   575 |
+|    1002 | C            | The C Programming Language                           | Brian W. Kernighan / Dennis Ritchie |   419 |
+|    1003 | C            | EXPERT C PROGRAMMING                                 | VAN DER LINDEN                      |   649 |
+|    1004 | C            | The C Companion                                      | Allen I. Holub                      |  2775 |
+|    1005 | C            | Head First C                                         | Griffiths David                     |   800 |
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup                   |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata                       |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers                        |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri                    |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt                     |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra                        |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt                     |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling                       |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch                        |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman                        |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim                        |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson                    |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David                      |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner                      |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson          |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings                   |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh                       |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum                 |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                              |   575 |
++---------+--------------+------------------------------------------------------+-------------------------------------+-------+
+24 rows in set (0.00 sec)
+
+mysql> delete from book5 where subject_name="C";
+Query OK, 5 rows affected (0.01 sec)
+
+mysql> show tables;
++-----------------+
+| Tables_in_books |
++-----------------+
+| book5           |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                | price |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup          |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata              |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers               |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri           |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt            |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra               |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt            |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling              |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch               |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman               |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim               |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson           |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David             |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner             |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings          |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh              |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum        |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                     |   575 |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+19 rows in set (0.00 sec)
+
+mysql> insert into book5 values(1026,"c","kiranacademy","kiran sir",20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from book5;
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+| book_id | subject_name | book_name                                            | author_name                | price |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+|    1006 | C++          | The C++ Programming Language                         | Bjarne Stroustrup          |   629 |
+|    1007 | C++          | C++ Primer Plus                                      | Stephen Prata              |  1211 |
+|    1008 | C++          | More Effective C++                                   | Scott Meyers               |   619 |
+|    1009 | C++          | C++: Effective Object-Oriented Software Construction | Kayshav Dattatri           |   838 |
+|    1010 | C++          | C++: The Complete Reference                          | Herbert Schildt            |   499 |
+|    1011 | Java SE      | Head First Java                                      | Kathy Sierra               |   850 |
+|    1012 | Java SE      | Java: The Complete Reference                         | Herbert Schildt            |   850 |
+|    1013 | Java SE      | The Java Programming Language                        | James Gosling              |  2736 |
+|    1014 | Java SE      | Effective Java                                       | Joshua Bloch               |   377 |
+|    1015 | Java SE      | Big Java Early Objects                               | Cay Horstman               |   600 |
+|    1016 | AWP          | HTML5 ÔÇô Up and Running                             | Mark Pilgrim               |  1658 |
+|    1017 | AWP          | Head First HTML and CSS                              | Elisabeth Robson           |  1175 |
+|    1018 | AWP          | JavaScript: The Definitive Guide                     | Flanagan David             |  1200 |
+|    1019 | AWP          | Inside XML                                           | Steven Holzner             |  1193 |
+|    1020 | AWP          | PHP and MySQL Web Development                        | Luke Welling/Laura Thomson |   735 |
+|    1022 | OS           | Operating Systems: Internals and Design Principles   | William Stallings          |   570 |
+|    1023 | OS           | Operating System: Concepts and Techniques            | M Naghibzadeh              |  1595 |
+|    1024 | OS           | Modern Operating Systems                             | Andrew S. Tanenbaum        |  6383 |
+|    1025 | OS           | Operating System Concept                             | Galvin                     |   575 |
+|    1026 | c            | kiranacademy                                         | kiran sir                  |    20 |
++---------+--------------+------------------------------------------------------+----------------------------+-------+
+20 rows in set (0.00 sec)
